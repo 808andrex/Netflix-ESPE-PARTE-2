@@ -7,7 +7,7 @@ import com.mongodb.client.MongoDatabase;
 public class MongoConnection {
     private static MongoClient mongoClient;
     private static MongoDatabase dataBase;
-    private static final String CONNECTION_STRING = "";
+    private static final String CONNECTION_STRING = "mongodb+srv://kespe:mongo1234@cluster0.yh8p2fm.mongodb.net/?appName=Cluster0";
     private static final String DATABASE_NAME = "netflix_db";
 
     public static MongoClient getMongoClient(){
