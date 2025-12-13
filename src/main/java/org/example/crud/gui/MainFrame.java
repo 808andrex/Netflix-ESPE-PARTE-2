@@ -4,6 +4,8 @@ import org.example.crud.dao.PeliculaDAO;
 import org.example.crud.model.Pelicula;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame{
     private JPanel mainPanel;
@@ -15,7 +17,7 @@ public class MainFrame extends JFrame{
     private JButton btnActualizar;
     private JButton bntEliminar;
     private JButton btnLimpiar;
-    private JTable table1;
+    private JTable tablaPeliculas;
     private PeliculaDAO peliculaDAO;
 
     public MainFrame() {
@@ -26,7 +28,15 @@ public class MainFrame extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.peliculaDAO = new PeliculaDAO();
-        btnGuardar.addActionListener(e -> guardarPelicula());
+
+        btnGuardar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guardarPelicula();
+            }
+        });
+
+        btnLimpiar.addActionListener(e->limpiarCampos());
     }
 
     private void guardarPelicula(){
@@ -36,12 +46,17 @@ public class MainFrame extends JFrame{
             int anioInt = Integer.parseInt(anio.getText());
 
             Pelicula peli = new Pelicula(tit,dir,anioInt);
-
-            titulo.setText("");
-            director.setText("");
-            anio.setText("");
+            peliculaDAO.crearPelicula(peli);
+            limpiarCampos();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this, "Error "+ex.getMessage());
         }
+    }
+
+    private void limpiarCampos(){
+        titulo.setText("");
+        director.setText("");
+        anio.setText("");
+        id.setText("");
     }
 }

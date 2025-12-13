@@ -33,6 +33,12 @@ public class PeliculaDAO {
 
     // --- METODOS CRUD---
     public void crearPelicula(Pelicula pelicula){
+        try {
+            collection.insertOne(pelicula);
+            System.out.printf("Pelicula guardado en Mongo ID"+pelicula.getId());
+        }catch(Exception e){
+            System.out.printf("Error al guardar: "+e.getMessage());
+        }
         collection.insertOne(pelicula);
     }
 
